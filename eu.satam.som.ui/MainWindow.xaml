@@ -1,0 +1,43 @@
+﻿<Controls:MetroWindow x:Class="eu.satam.som.ui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="SATAM Sales tool"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:sgDynamicSlideShow="clr-namespace:eu.satam.som.ui"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance sgDynamicSlideShow:MainViewModel, IsDesignTimeCreatable=True}"
+                      
+        GlowBrush="{DynamicResource AccentColorBrush}">
+    <Controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                <ResourceDictionary Source="./Customer/CustomersView.xaml" />
+                <ResourceDictionary Source="./Common/SharedThemes.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Controls:MetroWindow.Resources>
+
+    <Grid>
+
+        <Border Background="#AAEFEFEF">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Controls:ProgressRing IsActive="{Binding IsLoading}" Foreground="DodgerBlue"/>
+            </StackPanel>
+        </Border>
+
+        <TabControl IsEnabled="{Binding IsLoading, Converter={StaticResource InvertBoolean}}">
+            <TabItem Header="Offres"></TabItem>
+            <TabItem Header="Articles"></TabItem>
+            <TabItem Header="Clients">
+                <ContentPresenter Content="{Binding CustomersViewModel}" />
+            </TabItem>
+
+        </TabControl>
+
+    </Grid>
+
+
+</Controls:MetroWindow>
